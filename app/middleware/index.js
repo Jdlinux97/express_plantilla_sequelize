@@ -4,5 +4,5 @@ async function my_middleware(){
 
 }
 
-mddl.my_controller = my_controller;
+mddl.my_middleware = my_middleware;
 module.exports = mddl;

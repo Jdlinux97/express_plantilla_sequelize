@@ -3,7 +3,7 @@ const cors = require('cors')
 require('dotenv').config()
 
 //Importando los archivos de la ruta
-const ruta = require('./routes/')
+const ruta = require('./routes')
 
 
 const app = express();
@@ -32,6 +32,7 @@ app.use((err, req, res, next) => {
   res.status(400).json({
     error: err.message
   });
+  next()
 });
 
 
