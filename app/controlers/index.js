@@ -1,6 +1,6 @@
 const ctrl = {}
 
-async function my_controller(){
+async function my_controller(req, res){
 
 }
 
