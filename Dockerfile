@@ -1,11 +1,12 @@
+ARG PORT
 FROM node:10.16-alpine
 
-WORKDIR /express_plantilla
+WORKDIR /usr/src
 
-COPY . /express_plantilla
+COPY [".", "/usr/src"]
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE ${PORT}
 
-CMD ["npm", "start"]
+CMD ["npm","run", "dev"]

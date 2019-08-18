@@ -1,8 +1,5 @@
-const mddl = {}
-
-async function my_middleware(){
-
+module.exports = {
+    my_middleware: async (req, res) => {
+    
+    }
 }
-
-mddl.my_middleware = my_middleware;
-module.exports = mddl;

@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const ctrl =require('../controlers');
+const ctrl =require('../controllers');
 
-router.post('/MI_RUTA', ctrl.my_controller);
+router.get('/init', ctrl.init);
 
 module.exports = router;

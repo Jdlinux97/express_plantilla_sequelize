@@ -1,0 +1,16 @@
+version: "3.2"
+
+services:
+  express:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PORT: ${PORT}
+    image: express
+    expose:
+    - ${PORT}
+    volumes:
+    - ./:/usr/src
+    ports:
+      - "${PORT}:${PORT}"
