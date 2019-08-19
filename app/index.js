@@ -4,39 +4,38 @@ const http = require('http')
 const socketio = require('socket.io')
 require('dotenv').config()
 
-//Importando los archivos de la ruta
-const ruta = require('./routes')
 
 
 const app = express();
 const server = http.createServer(app)
 const io = socketio(server)
 
+//Importando los archivos de la ruta
+const ruta = require('./routes')
+require('./config/socket.js')(io);
+
 // Configuracion del servidor
-app.use(function(req, res, next){
-  res.io = io;
-  next();
-});
+
 
 app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(function(req, res, next){
+  res.io = io;
+  next();
+});
+
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Json");
   next();
 });
 
-
-
-
 //Archivos de rutas del servicio
 app.use('/api', ruta);
-
-
-
 
 // Ruta de error
 app.use((err, req, res, next) => {
