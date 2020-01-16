@@ -13,7 +13,9 @@ const io = socketio(server);
 //Importando los archivos de la ruta
 const ruta = require('./routes');
 require('./config/socket.js')(io);
-require('./config/sequelize');
+
+// Importacion de la conexion con los modelos
+const sequelize = require('./config/sequelize');
 
 // Configuracion del servidor
 
@@ -22,8 +24,10 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Midlewares
 app.use(function(req, res, next) {
 	res.io = io;
+	req.sequelize = sequelize;
 	next();
 });
 
@@ -35,7 +39,7 @@ app.use(function(req, res, next) {
 });
 
 //Archivos de rutas del servicio
-app.use('/api', ruta);
+app.use(ruta);
 
 // Ruta de error
 app.use((err, req, res, next) => {
